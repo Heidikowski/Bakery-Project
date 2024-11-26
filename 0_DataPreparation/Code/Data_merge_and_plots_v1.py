@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import scipy.stats as stats
 import numpy as np
 
-umsatz = pd.read_csv('/workspaces/Intro_data_science/data/umsatzdaten_gekuerzt.csv')
+umsatz = pd.read_csv('/workspaces/Bakery-Project/0_DataPreparation/Data/umsatzdaten_gekuerzt.csv')
 umsatz.head()
 
 
@@ -42,7 +42,7 @@ ordered_weekdays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Sat
 weekday_stats = weekday_stats.reindex(ordered_weekdays)
 
 # Implement Kieler Woche data
-kieler_woche_data = pd.read_csv('/workspaces/Intro_data_science/data/kiwo.csv')
+kieler_woche_data = pd.read_csv('/workspaces/Bakery-Project/0_DataPreparation/Data/kiwo.csv')
 
 # Convert the 'Datum' column to datetime for consistency
 kieler_woche_data['Datum'] = pd.to_datetime(kieler_woche_data['Datum'])
@@ -60,7 +60,7 @@ umsatz.drop(columns=['KielerWoche'], inplace=True)
 print(umsatz.head())
 
 # Implement Wetter data
-wetter_data = pd.read_csv('/workspaces/Intro_data_science/data/wetter.csv')
+wetter_data = pd.read_csv('/workspaces/Bakery-Project/0_DataPreparation/Data/wetter.csv')
 
 # Convert the 'Datum' column to datetime for consistency
 wetter_data['Datum'] = pd.to_datetime(wetter_data['Datum'])
