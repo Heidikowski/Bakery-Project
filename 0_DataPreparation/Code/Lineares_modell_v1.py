@@ -15,3 +15,8 @@ print(mod.summary())
 mod = smf.ols('Umsatz ~ wetter_sonnig + wetter_wolken + wetter_regen + wetter_schnee + wetter_gewitter + wetter_dunst + wetter_nebel', data=umsatz).fit()
 # Print the summary
 print(mod.summary())
+
+# Fit the linear model zu Wochentag
+mod = smf.ols('Umsatz ~ Wochentag', data=umsatz).fit()
+# Print the summary
+print(mod.summary())
