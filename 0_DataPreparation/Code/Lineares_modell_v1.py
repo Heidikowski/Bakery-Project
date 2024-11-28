@@ -7,6 +7,11 @@ umsatz = pd.read_csv('/workspaces/Bakery-Project/0_DataPreparation/Data/umsatz_g
 umsatz.head()
 
 # Fit the linear model zu Temperatur
+mod = smf.ols('Umsatz ~ Warengruppe', data=umsatz).fit()
+# Print the summary
+print(mod.summary())
+
+# Fit the linear model zu Temperatur
 mod = smf.ols('Umsatz ~ Temperatur', data=umsatz).fit()
 # Print the summary
 print(mod.summary())
