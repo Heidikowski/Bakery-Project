@@ -131,3 +131,53 @@ plt.tight_layout()  # Layout optimieren
 
 # Diagramm anzeigen
 plt.show()
+
+
+
+
+#Balkendiagramm mit Konfidenzintervall zum Vergleich Umsatz pro Kategorie während/ außerhalb der Kieler Woche
+
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+from scipy.stats import sem, t
+
+# Datensatz einlesen
+umsatz_gesamt = pd.read_csv('/workspaces/Bakery-Project/0_DataPreparation/Data/umsatz_gesamt.csv', sep=',')
+
+# Funktion zur Berechnung des Konfidenzintervalls
+def calculate_confidence_interval(data, confidence=0.95):
+    n = len(data)
+    if n == 0:
+        return 0  # Kein Datenpunkt, keine Breite
+    mean = np.mean(data)
+    error = sem(data)  # Standardfehler
+    margin = error * t.ppf((1 + confidence) / 2, n - 1)  # T-Wert für Konfidenzintervall
+    return margin
+
+# Umsatz pro Kategorie und Kieler Woche aggregieren
+umsatz_grouped = umsatz_gesamt.groupby(['Kategorie', 'KielerWoche'])['Umsatz']
+
+# Mittelwerte und Konfidenzintervalle berechnen
+means = umsatz_grouped.mean().unstack()
+conf_intervals = umsatz_grouped.apply(lambda x: calculate_confidence_interval(x)).unstack()
+
+# Balkendiagramm mit Fehlerbalken
+fig, ax = plt.subplots(figsize=(10, 6))
+means.plot(kind='bar', yerr=conf_intervals, ax=ax, capsize=4, colormap='viridis', alpha=0.9)
+
+# Titel und Achsenbeschriftungen hinzufügen
+ax.set_title('Durchschnittlicher Umsatz pro Kategorie während/ausserhalb der Kieler Woche\n(mit Konfidenzintervallen)', fontsize=14)
+ax.set_xlabel('Kategorie', fontsize=12)
+ax.set_ylabel('Durchschnittlicher Umsatz (€)', fontsize=12)
+ax.legend(title='Kieler Woche', labels=['Ausserhalb Kieler Woche', 'Während Kieler Woche'], loc='upper right')
+ax.grid(axis='y', linestyle='--', alpha=0.7)
+
+# Layout anpassen
+plt.xticks(rotation=0)
+plt.tight_layout()
+plt.show()
+
+
+
+
