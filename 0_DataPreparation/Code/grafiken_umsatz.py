@@ -180,4 +180,115 @@ plt.show()
 
 
 
+#Dichteverteilung der Temperatur, um zu entscheiden, was sinnvolle bins für die Temperatur sind
 
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Datensatz einlesen
+umsatz_gesamt = pd.read_csv('/workspaces/Bakery-Project/0_DataPreparation/Data/umsatz_gesamt.csv', sep=',')
+
+# Dichtediagramm der Temperatur
+plt.figure(figsize=(10, 6))
+sns.kdeplot(data=umsatz_gesamt, x='Temperatur', fill=True, color='skyblue', alpha=0.7)
+plt.title('Dichteverteilung der Temperatur', fontsize=14)
+plt.xlabel('Temperatur (°C)', fontsize=12)
+plt.ylabel('Dichte', fontsize=12)
+plt.grid(axis='y', linestyle='--', alpha=0.7)
+plt.tight_layout()
+plt.show()
+
+
+# Temperatur-Bins definieren und den Umsatz pro Temperatur-Bin darstellen
+bins = [-10, 10, 20, 35]  
+labels = ['Kalt', 'Moderat', 'Warm', ]
+
+# Temperatur-Bins der Spalte hinzufügen
+umsatz_gesamt['Temperatur_Bin'] = pd.cut(umsatz_gesamt['Temperatur'], bins=bins, labels=labels, include_lowest=True)
+
+# Kontrolle der Verteilung in den Bins
+print(umsatz_gesamt['Temperatur_Bin'].value_counts())
+
+print(umsatz_gesamt.head())
+
+# Daten aggregieren: Durchschnittlicher Umsatz pro Temperatur-Bin und Kategorie
+umsatz_bins = (
+    umsatz_gesamt.groupby(['Temperatur_Bin', 'Kategorie'])['Umsatz']
+    .mean()
+    .unstack(fill_value=0)  # Kategorien als Spalten
+)
+
+# Gestapeltes Balkendiagramm erstellen
+umsatz_bins.plot(
+    kind='bar',
+    stacked=True,
+    figsize=(10, 6),
+    colormap='viridis',  # Optionale Farbpalette
+    alpha=0.9
+)
+
+# Diagramm formatieren
+plt.title('Durchschnittlicher Umsatz pro Temperatur-Bin (gestapelt nach Kategorie)', fontsize=14)
+plt.xlabel('Temperatur-Bin', fontsize=12)
+plt.ylabel('Durchschnittlicher Umsatz (€)', fontsize=12)
+plt.xticks(rotation=0)  # X-Achse (Temperatur-Bin) gerade ausrichten
+plt.legend(title='Kategorie', bbox_to_anchor=(1.05, 1), loc='upper left')
+plt.tight_layout()  # Layout optimieren
+
+# Diagramm anzeigen
+plt.show()
+
+
+# Scatterplots erstellen zur Korrelation von Temperatur und Umsatz einzelner Backwaren
+
+import matplotlib.pyplot as plt
+
+# Daten filtern: Nur Brötchen aus der Kategorie auswählen
+broetchen_data = umsatz_gesamt[umsatz_gesamt['Kategorie'] == 'Broetchen']
+
+# Scatterplot erstellen
+plt.figure(figsize=(10, 6))
+plt.scatter(broetchen_data['Temperatur'], broetchen_data['Umsatz'], alpha=0.7, color='blue', edgecolor='k')
+
+# Diagramm formatieren
+plt.title('Zusammenhang zwischen Temperatur und Umsatz für Brötchen', fontsize=14)
+plt.xlabel('Temperatur (°C)', fontsize=12)
+plt.ylabel('Umsatz (€)', fontsize=12)
+plt.grid(True, alpha=0.3)  # Optionale Rasterlinien
+
+# Diagramm anzeigen
+plt.show()
+
+# Daten filtern: Nur Saisonbrot aus der Kategorie auswählen
+saisonbrot_data = umsatz_gesamt[umsatz_gesamt['Kategorie'] == 'Saisonbrot']
+
+# Scatterplot erstellen
+plt.figure(figsize=(10, 6))
+plt.scatter(saisonbrot_data['Temperatur'], saisonbrot_data['Umsatz'], alpha=0.7, color='blue', edgecolor='k')
+
+# Diagramm formatieren
+plt.title('Zusammenhang zwischen Temperatur und Umsatz für Saisonbrot', fontsize=14)
+plt.xlabel('Temperatur (°C)', fontsize=12)
+plt.ylabel('Umsatz (€)', fontsize=12)
+plt.grid(True, alpha=0.3)  # Optionale Rasterlinien
+
+# Diagramm anzeigen
+plt.show()
+
+
+# Daten filtern: Nur Croissant aus der Kategorie auswählen
+croissant_data = umsatz_gesamt[umsatz_gesamt['Kategorie'] == 'Croissant']
+
+# Scatterplot erstellen
+plt.figure(figsize=(10, 6))
+plt.scatter(croissant_data['Temperatur'], croissant_data['Umsatz'], alpha=0.7, color='blue', edgecolor='k')
+
+# Diagramm formatieren
+plt.title('Zusammenhang zwischen Temperatur und Umsatz für Croissant', fontsize=14)
+plt.xlabel('Temperatur (°C)', fontsize=12)
+plt.ylabel('Umsatz (€)', fontsize=12)
+plt.grid(True, alpha=0.3)  # Optionale Rasterlinien
+
+# Diagramm anzeigen
+plt.show()
