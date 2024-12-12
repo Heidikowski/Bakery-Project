@@ -38,6 +38,8 @@ print(mod.summary())
 mod = smf.ols('Umsatz ~ Wochentag + C(Warengruppe) + C(KielerWoche) + C(Monat) + C(wetter_sonnig) + C(wetter_wolken) + C(wetter_regen) + C(wetter_schnee) + C(wetter_gewitter) + C(wetter_dunst) + C(wetter_nebel) + C(sunday_or_holiday)', data=umsatz).fit()
 # Print the summary
 print(mod.summary())
+# best one yet
+
 
 # Everything except Kategorie, Bewoelkung, Temperatur, Windgeschwindigkeit, Wettercode
 mod = smf.ols('Umsatz ~ Wochentag + C(Warengruppe) + C(KielerWoche) + C(Monat) + C(wetter_sonnig) + C(wetter_wolken) + C(wetter_regen) + C(wetter_schnee) + C(wetter_gewitter) + C(wetter_dunst) + C(wetter_nebel) + C(sunday_or_holiday) + C(Temperatur_Bin)', data=umsatz).fit()
