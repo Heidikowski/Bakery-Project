@@ -48,7 +48,7 @@ Our processing involves the following steps:
     - dummy-encoding of product groups, months and weekdays 
     - splitting data back to train (sales available, used for machine learning model) and test (sales not available) datasets 
 
-3.  [**Dataset Characteristics (Barcharts)**](1_DatasetCharacteristics/)
+2.  [**Dataset Characteristics (Barcharts)**](1_DatasetCharacteristics/)
 `grafiken_umsatz.ipynb` includes main code for data analysis. 
 The following methods have been used: 
     - descriptive statistic of data using *pandas.DataFrame.describe()* method 
@@ -57,14 +57,14 @@ The following methods have been used:
     - correlation matrix of numerical features 
     - Graphical representation of different variables with influence on sales 
 
-4.  [**Baseline Model**](2_BaselineModel/)
+3.  [**Baseline Model**](2_BaselineModel/)
 `baseline_model_final.ipynb` includes main code for baseline model. 
 The following linear regression models have been tested on MAPE and adjusted R$²$: 
     - *statsmodels.api.OLS* 
     - *sklearn.linear_model.Ridge* plus hyperparameter tuning 
     - *sklearn.linear_model.SGDRegressor* 
 
-5.  [**Model Definition and Evaluation**](3_Model/) 
+4.  [**Model Definition and Evaluation**](3_Model/) 
 `neural_net_estimation.ipynb` includes main code for machine learning model and plots. 
 The following machine learning model has been used for bakery sales prediction: 
     - tool: tensorflow 
@@ -72,7 +72,7 @@ The following machine learning model has been used for bakery sales prediction:
     - loss: Huber 
     - learning rate: exponential decay 
 
-6.  [**Presentation**](4_Presentation/README.md)
+5.  [**Presentation**](4_Presentation/README.md)
 
 ## Cover Image
 
