@@ -74,7 +74,6 @@ The following machine learning model has been used for bakery sales prediction:
     - learning rate scheduler with exponential decay 
 
 5.  [**Presentation**](4_Presentation/README.md)
-5.  [**Presentation**](4_Presentation/README.md)
 
 ## Cover Image
 
