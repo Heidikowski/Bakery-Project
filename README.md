@@ -70,7 +70,7 @@ The following machine learning model has been used for bakery sales prediction:
     - tool: TensorFlow 
     - number of input features: 42  
     - model architecture: 3 dense layers (128 - 128 - 32 neurons), *relu* activation function, batch normalization and 0.3 dropout 
-    - Huber loss 
+    - loss: Huber  
     - learning rate scheduler with exponential decay 
 
 5.  [**Presentation**](4_Presentation/README.md)
