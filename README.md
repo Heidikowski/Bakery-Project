@@ -69,7 +69,7 @@ The following linear regression models have been tested on MAPE and adjusted R²
 The following machine learning model has been used for bakery sales prediction: 
     - tool: TensorFlow 
     - number of input features: 42  
-    - model architecture: 3 dense layers (128 - 128 -32 neurons), *relu* activation function, batch normalization and 0.3 dropout 
+    - model architecture: 3 dense layers (128 - 128 - 32 neurons), *relu* activation function, batch normalization and 0.3 dropout 
     - Huber loss 
     - learning rate scheduler with exponential decay 
 
